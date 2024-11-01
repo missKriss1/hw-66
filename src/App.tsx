@@ -5,6 +5,7 @@ import NewMeal from './Container/NewMeal/NewMeal.tsx';
 import { useCallback, useEffect, useState } from 'react';
 import { IMeals } from './types';
 import axoisApi from './axoisApi.ts';
+import EditMeal from './Container/EditMeal/EditMeal.tsx';
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home meals={meals} fetchMeals={fetchMeals}/>}/>
           <Route path="/newMeal" element={<NewMeal fetchMeals={fetchMeals}/>}/>
+          <Route path='/editMeal/:id' element={<EditMeal/>}/>
         </Routes>
       </main>
     </>

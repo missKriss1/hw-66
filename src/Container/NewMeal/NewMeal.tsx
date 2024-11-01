@@ -13,7 +13,7 @@ const NewMeal: React.FC<Props> = ({ fetchMeals }) => {
 
   const addNewMeal = async (meal: IMealsAdd) => {
     try {
-      await axiosApi.post('/meals.json', meal);
+      await axiosApi.post(`/meals.json`, meal);
       fetchMeals();
       navigate('/');
     } catch (error) {
@@ -23,7 +23,7 @@ const NewMeal: React.FC<Props> = ({ fetchMeals }) => {
 
   return (
     <div>
-      <MealForm addNewMeal={addNewMeal} />
+      <MealForm addNewMeal={addNewMeal}/>
     </div>
   );
 };

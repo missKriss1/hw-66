@@ -1,5 +1,6 @@
 import { IMeals } from '../../types';
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 interface Props {
@@ -23,7 +24,10 @@ const MealItem: React.FC <Props> = ({meal, onDeleteMeal}) => {
             <button className="btn btn-close ms-3" onClick={onDeleteMeal}></button>
           </div>
           <div>
-            <button className="btn btn-primary mt-2">Edit</button>
+            <button className="btn-primary btn ">
+              <NavLink className="text-white text-decoration-none" to={`/editMeal/${meal.id}`}>Edit</NavLink>
+            </button>
+
           </div>
         </div>
       </div>

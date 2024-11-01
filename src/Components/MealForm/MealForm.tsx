@@ -1,20 +1,26 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IMealsAdd } from '../../types';
 
 interface Props {
   addNewMeal: (meal: IMealsAdd) => void;
   isEdit?: boolean;
+  meal?: IMealsAdd;
 }
 
-const initialState: IMealsAdd = {
-  meals: '',
-  description: '',
-  kcal: 0,
-};
-
-const MealForm: React.FC<Props> = ({ addNewMeal, isEdit }) => {
+const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
+  const initialState = {
+    meals: meal?.meals || '',
+    description: meal?.description || '',
+    kcal: meal?.kcal || 0,
+  };
   const [newMeal, setNewMeal] = useState<IMealsAdd>(initialState);
+
+  useEffect(() => {
+    if(isEdit && meal){
+      setNewMeal(meal);
+    }
+  }, [isEdit, meal]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

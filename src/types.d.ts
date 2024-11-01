@@ -9,4 +9,5 @@ export interface IMealsAdd {
   meals: string;
   description: string;
   kcal: number;
+  id?: string;
 }
