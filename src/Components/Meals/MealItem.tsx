@@ -12,7 +12,7 @@ const MealItem: React.FC <Props> = ({meal, onDeleteMeal}) => {
     <div className="border border-gray m-4 p-4">
       <div className="row">
         <div className="col-4">
-          <h5>{meal.meals}</h5>
+          <h5 className="text-secondary">{meal.meals}</h5>
           <hr/>
           <strong>{meal.description}</strong>
         </div>

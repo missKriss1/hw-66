@@ -4,21 +4,16 @@ const ToolBar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-primary">
-        <div className="container">
-          <NavLink to="/"><span className="navbar-brand mb-0 text-white fs-1"></span></NavLink>
-
-
-          <div className="ms-auto">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">Calorie tracker</NavLink>
-              </li>
-              <li className="nav-item">
+        <div className=" container row">
+              <div className="nav-item col-5 ms-5 ps-5">
+                <h2>
+                  <NavLink className="nav-link" to="/">Calorie tracker</NavLink>
+                </h2>
+              </div>
+              <button className="btn btn-primary bg-white col-2 text-black">
                 <NavLink className="nav-link" to="/newMeal">Add new meal</NavLink>
-              </li>
-            </ul>
+              </button>
           </div>
-        </div>
       </nav>
     </>
   )
