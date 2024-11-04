@@ -12,6 +12,7 @@ interface Props {
 const Home: React.FC <Props> = ({meals, fetchMeals}) => {
 
   const delateMeal = useCallback(async (id: string) =>{
+
     try{
       await axiosApi.delete(`meals/${id}.json`);
       await fetchMeals();

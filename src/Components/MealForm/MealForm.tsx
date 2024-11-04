@@ -22,7 +22,7 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
     }
   }, [isEdit, meal]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const inputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewMeal((prevState) => ({
       ...prevState,
@@ -32,24 +32,24 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newMeal.description.trim() !== '') {
+    if (newMeal.description.trim() !== '' && newMeal.meals.trim() !== '') {
       addNewMeal(newMeal);
     } else {
-      alert("Заполните все поля корректно!");
+      alert("Fill in the blanks");
     }
   };
 
   return (
-    <div>
+    <div className="container w-50 mt-5">
       <form onSubmit={onSubmit}>
         <h3>{isEdit ? 'Edit' : 'Add new'} meal</h3>
-        <div className="form-group mb-2">
+        <div className="form-group mt-4">
           <select
             id="meals"
             name="meals"
-            onChange={handleInputChange}
+            onChange={inputChange}
             value={newMeal.meals}
-            className="form-control"
+            className="form-control mt-3"
           >
             <option value="">Select meal</option>
             <option value="breakfast">Breakfast</option>
@@ -57,10 +57,10 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
             <option value="lunch">Lunch</option>
             <option value="dinner">Dinner</option>
           </select>
-          <label htmlFor="description">Meal Description:</label>
+          <label className="mt-3">Meal Description:</label>
           <input
             type="text"
-            onChange={handleInputChange}
+            onChange={inputChange}
             value={newMeal.description}
             id="description"
             name="description"
@@ -68,19 +68,19 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
           />
         </div>
         <div className="form-group mb-2">
-          <label htmlFor="kcal">Kcal:</label>
+          <label className="mt-3">Kcal:</label>
           <input
             type="number"
             id="kcal"
             name="kcal"
             min={1}
             value={newMeal.kcal}
-            onChange={handleInputChange}
+            onChange={inputChange}
             className="form-control"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          {isEdit ? 'Edit' : 'Add'}
+        <button type="submit" className="btn btn-primary mt-3 d-flex align-items-center">
+         <span className="me-2">{isEdit ? 'Edit' : 'Add'}</span>
         </button>
       </form>
     </div>
