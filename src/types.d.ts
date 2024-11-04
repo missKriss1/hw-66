@@ -1,5 +1,5 @@
 export interface IMeals {
-  id: string
+  id: string;
   meals: string;
   description: string;
   kcal: number;

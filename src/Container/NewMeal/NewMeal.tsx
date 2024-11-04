@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import axiosApi from '../../axoisApi.ts';
-import { IMealsAdd } from '../../types';
-import MealForm from '../../Components/MealForm/MealForm.tsx';
-import * as React from 'react';
-import { useState } from 'react';
-import Spinner from '../../UI/Spinner/Spinner.tsx';
+import { useNavigate } from "react-router-dom";
+import axiosApi from "../../axoisApi.ts";
+import { IMealsAdd } from "../../types";
+import MealForm from "../../Components/MealForm/MealForm.tsx";
+import * as React from "react";
+import { useState } from "react";
+import Spinner from "../../UI/Spinner/Spinner.tsx";
 
 interface Props {
   fetchMeals: () => void;
@@ -19,25 +19,24 @@ const NewMeal: React.FC<Props> = ({ fetchMeals }) => {
     try {
       await axiosApi.post(`/meals.json`, meal);
       fetchMeals();
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.error(error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <>
-    {loading ? (
-      <Spinner/>
-    ): (
-      <div>
-        <MealForm addNewMeal={addNewMeal}/>
-      </div>
-    )}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <MealForm addNewMeal={addNewMeal} />
+        </div>
+      )}
     </>
-
   );
 };
 

@@ -1,20 +1,19 @@
-import MealForm from '../../Components/MealForm/MealForm.tsx';
-import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axiosApi from '../../axoisApi.ts';
-import { IMeals, IMealsAdd } from '../../types';
-import Spinner from '../../UI/Spinner/Spinner.tsx';
-
+import MealForm from "../../Components/MealForm/MealForm.tsx";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosApi from "../../axoisApi.ts";
+import { IMeals, IMealsAdd } from "../../types";
+import Spinner from "../../UI/Spinner/Spinner.tsx";
 
 const EditMeal = () => {
   const [meal, setMeal] = useState<IMeals | null>(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   const getOneMealById = useCallback(async () => {
     const response = await axiosApi.get<IMeals>(`/meals/${id}.json`);
-    if(response.data){
+    if (response.data) {
       setMeal(response.data);
     }
   }, [id]);
@@ -23,27 +22,29 @@ const EditMeal = () => {
     void getOneMealById();
   }, [getOneMealById]);
 
-  const addNewMeal = async(meal: IMealsAdd) => {
+  const addNewMeal = async (meal: IMealsAdd) => {
     setLoading(true);
-    try{
+    try {
       await axiosApi.put(`/meals/${id}.json`, meal);
       navigate(`/`);
-    }catch (e) {
+    } catch (e) {
       console.error(e);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
-  return meal && (
-    <>
-      {loading ? (
-        <Spinner/>
-      ): (
-        <div>
-          <MealForm addNewMeal={addNewMeal} isEdit={true} meal={meal}/>
-        </div>
-      )}
-    </>
+  return (
+    meal && (
+      <>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div>
+            <MealForm addNewMeal={addNewMeal} isEdit={true} meal={meal} />
+          </div>
+        )}
+      </>
+    )
   );
 };
 

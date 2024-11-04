@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { IMealsAdd } from '../../types';
+import * as React from "react";
+import { useEffect, useState } from "react";
+import { IMealsAdd } from "../../types";
 
 interface Props {
   addNewMeal: (meal: IMealsAdd) => void;
@@ -10,29 +10,31 @@ interface Props {
 
 const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
   const initialState = {
-    meals: meal?.meals || '',
-    description: meal?.description || '',
+    meals: meal?.meals || "",
+    description: meal?.description || "",
     kcal: meal?.kcal || 0,
   };
   const [newMeal, setNewMeal] = useState<IMealsAdd>(initialState);
 
   useEffect(() => {
-    if(isEdit && meal){
+    if (isEdit && meal) {
       setNewMeal(meal);
     }
   }, [isEdit, meal]);
 
-  const inputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const inputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setNewMeal((prevState) => ({
       ...prevState,
-      [name]: name === 'kcal' ? Number(value) : value,
+      [name]: name === "kcal" ? Number(value) : value,
     }));
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newMeal.description.trim() !== '' && newMeal.meals.trim() !== '') {
+    if (newMeal.description.trim() !== "" && newMeal.meals.trim() !== "") {
       addNewMeal(newMeal);
     } else {
       alert("Fill in the blanks");
@@ -42,7 +44,7 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
   return (
     <div className="container w-50 mt-5">
       <form onSubmit={onSubmit}>
-        <h3>{isEdit ? 'Edit' : 'Add new'} meal</h3>
+        <h3>{isEdit ? "Edit" : "Add new"} meal</h3>
         <div className="form-group mt-4">
           <select
             id="meals"
@@ -79,8 +81,11 @@ const MealForm: React.FC<Props> = ({ addNewMeal, isEdit, meal }) => {
             className="form-control"
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-3 d-flex align-items-center">
-         <span className="me-2">{isEdit ? 'Edit' : 'Add'}</span>
+        <button
+          type="submit"
+          className="btn btn-primary mt-3 d-flex align-items-center"
+        >
+          <span className="me-2">{isEdit ? "Edit" : "Add"}</span>
         </button>
       </form>
     </div>
